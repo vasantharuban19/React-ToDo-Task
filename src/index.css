@@ -1,0 +1,22 @@
+.title{
+    padding-left: 150px;
+    font-size:x-large;
+    color:rgb(19,173,137)
+}
+.add{
+    background-color: rgb(19,173,137);
+    border: 1px;
+    padding: 4px 30px;
+    color: white;
+    border-radius: 25px
+}
+.todo{
+    font-size: x-large;
+}
+#status{
+    font-size: x-large;
+}
+
+.card{
+    background-color: rgb(204,245,211);
+}
