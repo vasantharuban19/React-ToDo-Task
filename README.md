@@ -23,5 +23,7 @@ A fully responsive **Todo List Application** built with **React.js**, featuring 
 
 ## 📷 Screenshot
 
-![Todo App Screenshot](assets/Screenshot1.png)
-![Todo App Screenshot](assets/Screenshot2.png)
+![Todo App UI](assets/Screenshot1.png)
+
+<img src="assets/Screenshot1.png" alt="Add Todo" width="500"/>
+
