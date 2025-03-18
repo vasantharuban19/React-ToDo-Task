@@ -1,1 +1,27 @@
-This is React Todo Task Creating a Todo App which have All CRUD Functionalities
+# React Todo App ✅
+
+## 🌟 Overview
+
+A fully responsive **Todo List Application** built with **React.js**, featuring **task creation, editing, deletion, and filtering**. Includes a **modern UI, smooth animations, and status filtering with a dropdown menu**.
+
+## 🚀 Features
+
+- 📝 **Add, Edit, Delete Todos**
+- ✅ **Mark Todos as Completed or Not Completed**
+- 🔍 **Filter Todos (All, Completed, Not Completed)**
+- 🎨 **Modern & Responsive UI with Bootstrap**
+- 🔄 **Persistent Data with LocalStorage (optional)**
+- 🔗 **React Router for Navigation & Dynamic Editing**
+- ⚡ **Fast & Optimized State Updates**
+
+## 🛠️ Tech Stack
+
+- React.js
+- React Router DOM
+- Bootstrap 5
+- CSS Animations
+
+## 📷 Screenshot
+
+![Todo App Screenshot](assets/Screenshot1.png)
+![Todo App Screenshot](assets/Screenshot2.png)

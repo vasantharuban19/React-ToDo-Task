@@ -1,84 +1,131 @@
-import React,{useState} from 'react'
-import { Link,useNavigate,Outlet } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link, useNavigate, Outlet } from "react-router-dom";
 
-const Title=({todos,setTodos})=> {
-  let [title, setName] = useState("");
-  let [description, setDescription] = useState("");
-  let [status, setStatus] = useState(false);
-  let [color, setColor] = useState("");
-  let [option, setOption] = useState("All");
+const Title = ({ todos, setTodos }) => {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [status, setStatus] = useState(false);
+  const [color, setColor] = useState("bg-info");
+  const [option, setOption] = useState("All");
+  const [isOpen, setIsOpen] = useState(false);
 
-  let navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const handleCreate = ()=>{
-    let id = todos.length ? todos[todos.length -1].id+1 : 1 
-    let newArray = [...todos]
-    newArray.push({
-      id,
-      title,
-      description,
-      status
-    })
-    setTodos(newArray)
-    navigate('/title/all')
-  }
+  const handleCreate = () => {
+    if (!title.trim() || !description.trim()) {
+      alert("Please enter a valid Todo Name and Description.");
+      return;
+    }
 
-  return <>
-  <h1 className="title">My Todo</h1>
-  <br></br>
-  <div className="col col-md-5 ">
- <div className="row row-cols-1 row-cols-md-3 g-4">
+    const id = todos.length ? todos[todos.length - 1].id + 1 : 1;
+    const newArray = [...todos, { id, title, description, status }];
+    setTodos(newArray);
+    setTitle("");
+    setDescription("");
+    navigate("/title/all");
+  };
 
- <div className="col justify-content-start mt-6 text-align-center"  >
-   <div className=" text-center">
-     <input type="text" placeholder="Todo Name" onChange={(e)=>{setName(e.target.value)}}></input>
-   </div>
- </div>
-<br></br>
- <div className="col justify-content-end  ml-5">
-   <div className=" text-center ">
- <input type="text" placeholder="Todo Description" onChange={(e)=>{setDescription(e.target.value)}}></input>
-   </div>
- </div>
- <br></br>
- <div className="col">
-   <div className=" text-center">
-     <button type="submit "onClick={()=>{handleCreate()}} className="add">Add Todo</button>
-   </div>
- </div>
+  const handleFilterChange = (filter, colorClass) => {
+    setOption(filter);
+    setColor(colorClass);
+    setIsOpen(false);
+    document.activeElement.blur();
+  };
 
- </div>
+  return (
+    <>
+      <h1 className="title">My Todo</h1>
 
- <div className="d-flex justify-content-between p-5">
-         <h2 className="todo">My Todos</h2>
-         <div>
-           <h3>
-           <div id='status' className="card-text d-flex gap-2">
-             Status Filter :{" "}
-             <span>
-             {" "}            
-                 <div className="dropdown">
-                      <button className={`btn btn-success dropdown-toggle ${color}`} type="button" data-bs-toggle="dropdown" aria-expanded="false">{option}</button>
-                      <ul className="dropdown-menu">
-                        <li><Link to={'all'}           className="dropdown-item" onClick={()=>{setOption("All");          setColor("bg-info");  }} >All</Link></li>
-                        <li><Link to={'completed'}     className="dropdown-item" onClick={()=>{setOption("Completed");    setColor("bg-success");}} >Completed</Link></li>
-                        <li><Link to={'notcompleted'}  className="dropdown-item" onClick={()=>{setOption("NotCompleted"); setColor("bg-danger"); }} >Not Completed</Link></li>                         
-                      </ul>
-                 </div>
-             </span>
-             </div>
-           </h3>
-         </div>
-         </div>
-       </div> 
+      <div className="container my-4">
+        <div className="row g-3 align-items-center">
+          <div className="col-md-4">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Todo Name"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+          </div>
+          <div className="col-md-4">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Todo Description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+          </div>
+          <div className="col-md-4 text-center">
+            <button className="btn add-btn" onClick={handleCreate}>
+              Add Todo
+            </button>
+          </div>
+        </div>
+      </div>
 
-       <div className="container">
-       <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-sm-2 g-4">
-          <Outlet></Outlet>       
-       </div>
-       </div>
-  
-  </>
-}
+      <div className="d-flex justify-content-between align-items-center px-5">
+        <h2 className="todo">My Todos</h2>
+        <div>
+          <h3>
+            <div id="status" className="d-flex gap-2">
+              Status Filter:{" "}
+              <div className="dropdown">
+                <button
+                  className={`btn dropdown-toggle ${color}`}
+                  type="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded={isOpen}
+                  onClick={() => setIsOpen(!isOpen)}
+                >
+                  {option}
+                </button>
+                <ul className={`dropdown-menu ${isOpen ? "show" : ""}`}>
+                  <li>
+                    <Link
+                      to="all"
+                      className="dropdown-item"
+                      onClick={() => handleFilterChange("All", "bg-info")}
+                    >
+                      All
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="completed"
+                      className="dropdown-item"
+                      onClick={() =>
+                        handleFilterChange("Completed", "bg-success")
+                      }
+                    >
+                      Completed
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="notcompleted"
+                      className="dropdown-item"
+                      onClick={() =>
+                        handleFilterChange("Not Completed", "bg-danger")
+                      }
+                    >
+                      Not Completed
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </h3>
+        </div>
+      </div>
 
-export default Title
+      <div className="container mt-4">
+        <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+          <Outlet />
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default Title;

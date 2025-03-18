@@ -1,22 +1,162 @@
-.title{
-    padding-left: 150px;
-    font-size:x-large;
-    color:rgb(19,173,137)
-}
-.add{
-    background-color: rgb(19,173,137);
-    border: 1px;
-    padding: 4px 30px;
-    color: white;
-    border-radius: 25px
-}
-.todo{
-    font-size: x-large;
-}
-#status{
-    font-size: x-large;
+/* General Styles */
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
 }
 
-.card{
-    background-color: rgb(204,245,211);
+/* Title */
+.title {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #13ad89;
+  margin-bottom: 20px;
+}
+
+/* Add Button */
+.add-btn {
+  background-color: #13ad89;
+  border: none;
+  padding: 10px 25px;
+  color: white;
+  font-weight: bold;
+  border-radius: 25px;
+  font-size: 1rem;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.add-btn:hover {
+  background-color: #0f9678;
+  transform: scale(1.05);
+}
+
+/* Todo Title */
+.todo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Status Filter */
+#status {
+  font-size: 1.2rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dropdown-menu {
+  min-width: 180px;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.dropdown-item {
+  font-size: 1rem;
+  padding: 10px;
+  transition: background 0.3s ease-in-out;
+}
+
+.dropdown-item:hover {
+  background-color: #13ad89;
+  color: white;
+}
+
+/* Card Styling */
+.card {
+  background-color: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+/* Card Content */
+.card-text {
+  font-size: 1rem;
+  color: #444;
+  margin-bottom: 10px;
+}
+
+/* Form Inputs */
+.form-control {
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  width: 100%;
+  transition: border 0.3s ease-in-out;
+}
+
+.form-control:focus {
+  border-color: #13ad89;
+  outline: none;
+  box-shadow: 0px 0px 8px rgba(19, 173, 137, 0.5);
+}
+
+/* Buttons */
+.btn {
+  padding: 8px 16px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 8px;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.btn-info {
+  background-color: #007bff;
+  color: white;
+  border: none;
+}
+
+.btn-info:hover {
+  background-color: #0056b3;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+}
+
+.btn-danger:hover {
+  background-color: #a71d2a;
+}
+
+/* Responsive Grid */
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 0 10px;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .todo {
+    font-size: 1.5rem;
+  }
+
+  .add-btn {
+    width: 100%;
+    padding: 12px;
+  }
+
+  .card {
+    padding: 15px;
+  }
+
+  .form-control {
+    padding: 10px;
+  }
 }

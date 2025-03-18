@@ -1,76 +1,83 @@
-import React,{useState,useEffect} from 'react'
-import { useNavigate,useParams } from 'react-router-dom'
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
-const Edit=({todos,setTodos})=> {
+const Edit = ({ todos, setTodos }) => {
+  const { id } = useParams();
+  const navigate = useNavigate();
 
-  let params = useParams()
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [status, setStatus] = useState(false);
 
-  let navigate = useNavigate()
-
-  let [title, setName] = useState("");
-  let [description, setDescription] = useState("");
-  let [status, setStatus] = useState("");
-
-
-  const findIndex = (id)=>{
-    for(let i = 0; i<todos.length;i++)
-    {
-      if(id === todos[i].id)
-        {return i}
+  useEffect(() => {
+    const todo = todos.find((t) => t.id === Number(id));
+    if (todo) {
+      setTitle(todo.title);
+      setDescription(todo.description);
+      setStatus(todo.status);
     }
-  }
+  }, [id, todos]);
 
- 
-  const handleEdit = ()=>{
+  const handleEdit = () => {
+    if (!title.trim() || !description.trim()) {
+      alert("Please fill in all fields.");
+      return;
+    }
 
-    let id = Number(params.id)
-    let index = findIndex(id)
-    let newArray = [...todos]// deep copy Achieve Immutability
-    newArray.splice(index,1,{
-      id,
-      title,
-      description,
-      status})
-    setTodos(newArray)
-    navigate('/display/all')
-  }
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) =>
+        todo.id === Number(id) ? { ...todo, title, description, status } : todo
+      )
+    );
 
-  const getUserData = ()=>{
-    let id = Number(params.id)
-    let index = findIndex(id)
-    setName(todos[index].title)
-    setDescription(todos[index].description)
-    setStatus(todos[index].status)
+    navigate("/title/all");
+  };
 
-  }
+  return (
+    <div className="container mt-4">
+      <h2 className="text-center text-primary mb-4">Edit Todo</h2>
 
-useEffect(()=>{getUserData()},[])
+      <div className="card p-4 shadow-lg">
+        <div className="mb-3">
+          <label className="form-label fw-bold">Todo Name</label>
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Enter Todo Name"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </div>
 
-return (
-    <>
-     <h1 className="text-center HeaderColor">Edit Todo</h1>
-         <div className="container text-center">
-           <div className="row row-cols-1 row-cols-md-2 row-cols-lg-2 row-cols-sm-1 g-1">
-             <div className="col col-md-6 mt-3">
-               <div className="">
-                 <input placeholder=" Todo Name" value={title} onChange={(e)=>{setName(e.target.value)}} type="text" />
-               </div>
-             </div>
-             <div className="col col-lg-6 mt-3">
-               <div className="">
-                 <input placeholder="Todo Description" value={description} onChange={(e)=>{setDescription(e.target.value)}} type="text" />
-               </div>
-             </div>
-             <div className="col col-lg-12 col-md-12 col-sm-12 mt-3">
-               <div className="">
-                 <button type="button" onClick={()=> handleEdit()} className="btn btn-info mt-3">Save Todo</button>
-                 
-               </div>
-             </div>
-           </div>
-         </div>
-    </>
-   )
-}
+        <div className="mb-3">
+          <label className="form-label fw-bold">Description</label>
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Enter Description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+        </div>
 
-export default Edit
+        <div className="mb-3">
+          <label className="form-label fw-bold">Status</label>
+          <select
+            className="form-select"
+            value={status}
+            onChange={(e) => setStatus(e.target.value === "true")}
+          >
+            <option value="true">Completed</option>
+            <option value="false">Not Completed</option>
+          </select>
+        </div>
+
+        <button className="btn btn-success w-100" onClick={handleEdit}>
+          Save Changes
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default Edit;

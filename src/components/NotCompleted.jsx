@@ -1,13 +1,14 @@
-import React from 'react'
-import Card from './Card'
+import React from "react";
+import AllCards from "./Card";
+const NotCompleted = ({ todos, setTodos }) => {
+  let notCompletedTodos = todos.filter((e) => e.status === false);
+  return (
+    <>
+      {notCompletedTodos.map((todo) => (
+        <AllCards todo={todo} setTodos={setTodos} key={todo.id} />
+      ))}
+    </>
+  );
+};
 
-const NotCompleted = ({todos,setTodos})=>{
-  let c = todos.filter((e)=>e.status===false) 
-  return <>
-  {c.map((e,i)=>{
-    return <Card data={todos} todos={e} setTodos={setTodos} key={i}/>
-  })}
-  </>
-}
-
-export default NotCompleted
+export default NotCompleted;
