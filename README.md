@@ -2,7 +2,7 @@
 
 ## 🌟 Overview
 
-A fully responsive **Todo List Application** built with **React.js**, featuring **task creation, editing, deletion, and filtering**. Includes a **modern UI, smooth animations, and status filtering with a dropdown menu**.
+A responsive **Todo Application** built with **React.js**, featuring **task creation, editing, deletion, and filtering**. Includes a **modern UI, smooth animations, and status filtering with a dropdown menu**.
 
 ## 🚀 Features
 
